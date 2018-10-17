@@ -3,6 +3,8 @@ import { NavController } from 'ionic-angular';
 //import { AngularFireModule } from 'angularfire2';
 import { FirebaseServiceProvider } from '../../providers/firebase-service/firebase-service';
 import { FirebaseListObservable } from 'angularfire2/database';
+import { Task } from '../../providers/models/task.model';
+import { NgForm } from '@angular/forms';
 
 
 @Component({
@@ -12,12 +14,20 @@ import { FirebaseListObservable } from 'angularfire2/database';
 export class HomePage {
 
   shoppingItems : FirebaseListObservable<any[]>;
-  newItem = '';
+  newItem : Task;
   constructor(public navCtrl: NavController, public firebaseService: FirebaseServiceProvider) {
     this.shoppingItems = this.firebaseService.getShoppingItems();
+    this.newItem = {
+      id : null,
+      date : '',
+      time : '',
+      text : ''
+    }
+    console.log(this.newItem);
   }
 
-  addItem(name){
+  addItem(form : NgForm){
+    console.log(form);
     this.firebaseService.addItem(this.newItem);
   }
 

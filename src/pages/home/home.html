@@ -9,24 +9,46 @@
 
 <ion-content>
   <ion-row>
-    <ion-col col-9>
+    <ion-col col-12>
+        <ion-item>
+            <ion-label>Time</ion-label>
+            <ion-datetime displayFormat="HH:mm" [(ngModel)]="newItem.time" name="time"></ion-datetime>
+          </ion-item>
+          <ion-item>  
+            <ion-label>Date</ion-label>      
+            <ion-datetime displayFormat="MM/DD/YYYY" [(ngModel)]="newItem.date" name="date" ></ion-datetime>
+          </ion-item>
       <ion-item>
-        <ion-input type="text" [(ngModel)]="newItem" placeholder="New Shopping item"></ion-input>
-      </ion-item>
+        <ion-textarea [(ngModel)]="newItem.text" name="text" placeholder="Enter a description"></ion-textarea>        
+      </ion-item>      
     </ion-col>
     <ion-col>
-      <button ion-button (click)="addItem()">Add!</button>
+      <button ion-button center (click)="addItem(newItem)">Add new task</button>
     </ion-col>
   </ion-row>
  
   <ion-list>
     <ion-item-sliding *ngFor="let item of shoppingItems | async">
       <ion-item>
-        {{ item.$value }}
+          <ion-card>
+
+              <ion-card-header>
+                date - {{ item.date }}                
+              </ion-card-header>   
+              <ion-card-header>
+                  time - {{ item.time }}
+              </ion-card-header>         
+              <ion-card-content>
+                  {{ item.text }}
+              </ion-card-content>            
+            </ion-card>
+        
+        
+        
       </ion-item>
       <ion-item-options side="right">
         <button ion-button color="danger" icon-only (click)="removeItem(item.$key)"><ion-icon name="trash"></ion-icon></button>
       </ion-item-options>
     </ion-item-sliding>
-  </ion-list>
+  </ion-list>  
 </ion-content>

@@ -1,6 +1,7 @@
 import { AngularFireDatabase } from 'angularfire2/database';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Task } from '../models/task.model';
 
 /*
   Generated class for the FirebaseServiceProvider provider.
@@ -14,7 +15,6 @@ export class FirebaseServiceProvider {
   constructor(public afd: AngularFireDatabase) {
     console.log('Hello FirebaseServiceProvider Provider');
   }
-
 
   getShoppingItems(){
     return this.afd.list('/shoppingItems/');
